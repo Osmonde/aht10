@@ -1,0 +1,17 @@
+[Unit]
+Description=Temperature Logging Daemon
+After=network.target
+
+[Service]
+User=root
+Group=root
+UMask=0002
+Type=exec
+ExecStart = /usr/local/sbin/templog.py
+ExecReload = /bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target graphical.target
